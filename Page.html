@@ -1,0 +1,20 @@
+<div>
+<? var data = valid(); ?>
+<? var currentCellValue = currentSelection(); ?>
+<? var status = ""; ?>
+<form id="form" name="form">
+<? if(Object.prototype.toString.call(data) === '[object Array]') { ?>
+<? for (var i = 0; i < data.length; i++) { ?>
+<? for (var j = 0; j < data[i].length; j++) { ?>
+<? if (currentCellValue.indexOf(data[i][j]) == -1) {status = "";} else {status = "checked";} ?>
+<input type="checkbox" id="ch<?= '' + i + j ?>" name="ch<?= '' + i + j ?>" value="<?= data[i][j] ?>" <?=status?>><?= data[i][j] ?><br>
+<? } ?>
+<? } ?>
+<? } else { ?>
+<p>Maybe current cell doesn't have <a href="https://support.google.com/drive/answer/139705?hl=en">Data validation...</a></p>
+<? } ?>
+<input type="button" value="Rafraîchir" onclick="google.script.run.showDialog()" />
+<input type="button" value="Appliquer" onclick="google.script.run.fillCell(this.parentNode)" />
+</form>
+</div>
+
